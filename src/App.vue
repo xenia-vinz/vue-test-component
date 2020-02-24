@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <UsersRequestParser url="/api/testtakers.json" />
+    <UsersRequestParser url="/vue-test-component/api/testtakers.json" />
   </div>
 </template>
 

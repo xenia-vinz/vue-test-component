@@ -23,12 +23,6 @@ export default {
     };
   },
   computed: {
-    path() {
-      const detectedRelativeURL = new RegExp('^(?:[a-z]+:)?//', 'i');
-      const isRelative = detectedRelativeURL.test(this.url);
-      const prefix = (isRelative && process.env.NODE_ENV === 'production') ? '/vue-test-component' : ''; // 4githubpages
-      return this.url ? `${prefix}${this.url}` : null;
-    },
     type() {
       return this.url ? this.url.split('.').pop().toLowerCase() : null;
     },
@@ -53,7 +47,7 @@ export default {
     },
     loadUsersJSON() {
       this.$superagent
-        .get(this.path)
+        .get(this.url)
         .then((response) => {
           const responseBody = response.body || {};
 
@@ -70,7 +64,7 @@ export default {
         });
     },
     loadUsersCSV() {
-      this.$papa.parse(this.path, {
+      this.$papa.parse(this.url, {
         download: true,
         header: true,
         complete: (result) => {
